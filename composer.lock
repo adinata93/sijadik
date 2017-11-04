@@ -551,7 +551,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-11-03 17:17:00"
+            "time": "2017-11-03T17:17:00+00:00"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -704,7 +704,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-09-04 15:30:52"
+            "time": "2017-09-04T15:30:52+00:00"
         },
         {
             "name": "npm-asset/fullcalendar",
