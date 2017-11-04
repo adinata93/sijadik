@@ -2,12 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\MataKuliah;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Jadwal */
 
-$this->title = $model->nip_nidn;
-$this->params['breadcrumbs'][] = ['label' => 'Jadwals', 'url' => ['index']];
+$matkul = MataKuliah::find()->where(['id' => $model->id_mata_kuliah_pengajar])->one();
+
+$this->title = $matkul->nama_mata_kuliah;
+$this->params['breadcrumbs'][] = ['label' => 'Jadwal', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="jadwal-view">
@@ -15,8 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'nip_nidn' => $model->nip_nidn, 'kode_mata_kuliah' => $model->kode_mata_kuliah], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'nip_nidn' => $model->nip_nidn, 'kode_mata_kuliah' => $model->kode_mata_kuliah], [
+        <?= Html::a('Update', ['update', 'id' => $model->id, 'nip_nidn_dosen_pengajar' => $model->nip_nidn_dosen_pengajar, 'id_mata_kuliah_pengajar' => $model->id_mata_kuliah_pengajar], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'nip_nidn_dosen_pengajar' => $model->nip_nidn_dosen_pengajar, 'id_mata_kuliah_pengajar' => $model->id_mata_kuliah_pengajar], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -28,14 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'nip_nidn',
-            'kode_mata_kuliah',
-            'kode_organisasi',
-            'nomor_sk',
-            'sks_ekivalen',
-            'beban_sks_dosen',
-            'fte',
-            'status',
+            // 'id',
+            // 'nip_nidn_dosen_pengajar',
+            'nama_dosen',
+            'departemen_dosen',
+            // 'id_mata_kuliah_pengajar',
+            'nama_mata_kuliah',
+            'jenis_mata_kuliah',
+            'kategori_koefisien',
+            'jadwal_start',
+            'jadwal_end',
         ],
     ]) ?>
 

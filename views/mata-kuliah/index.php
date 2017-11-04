@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MataKuliahSearch */
@@ -22,16 +22,60 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'kartik\grid\SerialColumn'],
 
-            'kode_mata_kuliah',
-            'nama_mata_kuliah',
-            'jenis_mata_kuliah',
-            'program_studi',
-            'jenjang',
-            // 'program_kelas',
+            // [
+            //     'attribute'=>'id',
+            //     'vAlign'=>'middle',                
+            // ],
+            [
+                'attribute'=>'fakultas_unit_pengajaran',
+                'label'=>'Fak. Unit Pengajaran',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'kode_organisasi',
+                'label'=>'Kode Org.',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'program_studi',
+                'vAlign'=>'middle',                
+            ],
+            // [
+            //     'attribute'=>'jenjang',
+            //     'vAlign'=>'middle',                
+            // ],
+            // [
+            //     'attribute'=>'program',
+            //     'vAlign'=>'middle',                
+            // ],
+            [
+                'attribute'=>'kategori_koefisien',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'nama_mata_kuliah',
+                'label'=>'Nama MK',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'jenis_mata_kuliah',
+                'label'=>'Jenis MK',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'kode_kelas',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'jenis_kelas',
+                'vAlign'=>'middle',
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'kartik\grid\ActionColumn'],
         ],
+        'pjax' => true,
+        'hover' => true,
     ]); ?>
 </div>

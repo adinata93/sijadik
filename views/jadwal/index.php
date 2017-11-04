@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\JadwalSearch */
@@ -22,18 +22,56 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'kartik\grid\SerialColumn'],
 
-            'nip_nidn',
-            'kode_mata_kuliah',
-            'kode_organisasi',
-            'nomor_sk',
-            'sks_ekivalen',
-            // 'beban_sks_dosen',
-            // 'fte',
-            // 'status',
+            // [
+            //     'attribute'=>'id',
+            //     'vAlign'=>'middle',
+            // ],
+            // [
+            //     'attribute'=>'nip_nidn_dosen_pengajar',
+            //     'vAlign'=>'middle',
+            // ],
+            [
+                'attribute'=>'nama_dosen',
+                'label'=>'Nama Dosen',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'departemen_dosen',
+                'label'=>'Dept. Dosen',
+                'vAlign'=>'middle',
+            ],
+            // [
+            //     'attribute'=>'id_mata_kuliah_pengajar',
+            //     'vAlign'=>'middle',
+            // ],
+            [
+                'attribute'=>'nama_mata_kuliah',
+                'label'=>'Nama MK',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'jenis_mata_kuliah',
+                'label'=>'Jenis MK',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'kategori_koefisien',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'jadwal_start',
+                'vAlign'=>'middle',
+            ],
+            [
+                'attribute'=>'jadwal_end',
+                'vAlign'=>'middle',
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'kartik\grid\ActionColumn'],
         ],
+        'pjax' => true,
+        'hover' => true,
     ]); ?>
 </div>

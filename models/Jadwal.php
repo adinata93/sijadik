@@ -7,17 +7,18 @@ use Yii;
 /**
  * This is the model class for table "jadwal".
  *
- * @property string $nip_nidn
- * @property string $kode_mata_kuliah
- * @property string $kode_organisasi
- * @property string $nomor_sk
- * @property string $sks_ekivalen
- * @property string $beban_sks_dosen
- * @property string $fte
- * @property integer $status
+ * @property integer $id
+ * @property string $nip_nidn_dosen_pengajar
+ * @property string $nama_dosen
+ * @property string $departemen_dosen
+ * @property integer $id_mata_kuliah_pengajar
+ * @property string $nama_mata_kuliah
+ * @property string $jenis_mata_kuliah
+ * @property string $kategori_koefisien
+ * @property string $jadwal_start
+ * @property string $jadwal_end
  *
- * @property Dosen $nipNidn
- * @property MataKuliah $kodeMataKuliah
+ * @property Pengajar $nipNidnDosenPengajar
  */
 class Jadwal extends \yii\db\ActiveRecord
 {
@@ -35,12 +36,12 @@ class Jadwal extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nip_nidn', 'kode_mata_kuliah'], 'required'],
-            [['sks_ekivalen', 'beban_sks_dosen', 'fte'], 'number'],
-            [['status'], 'integer'],
-            [['nip_nidn', 'kode_mata_kuliah', 'kode_organisasi', 'nomor_sk'], 'string', 'max' => 40],
-            [['nip_nidn'], 'exist', 'skipOnError' => true, 'targetClass' => Dosen::className(), 'targetAttribute' => ['nip_nidn' => 'nip_nidn']],
-            [['kode_mata_kuliah'], 'exist', 'skipOnError' => true, 'targetClass' => MataKuliah::className(), 'targetAttribute' => ['kode_mata_kuliah' => 'kode_mata_kuliah']],
+            [['nip_nidn_dosen_pengajar', 'nama_dosen', 'departemen_dosen', 'id_mata_kuliah_pengajar', 'nama_mata_kuliah', 'jenis_mata_kuliah', 'kategori_koefisien', 'jadwal_start', 'jadwal_end'], 'required'],
+            [['departemen_dosen', 'kategori_koefisien'], 'string'],
+            [['id_mata_kuliah_pengajar'], 'integer'],
+            [['jadwal_start', 'jadwal_end'], 'safe'],
+            [['nip_nidn_dosen_pengajar', 'nama_dosen', 'nama_mata_kuliah', 'jenis_mata_kuliah'], 'string', 'max' => 100],
+            [['nip_nidn_dosen_pengajar', 'id_mata_kuliah_pengajar'], 'exist', 'skipOnError' => true, 'targetClass' => Pengajar::className(), 'targetAttribute' => ['nip_nidn_dosen_pengajar' => 'nip_nidn_dosen', 'id_mata_kuliah_pengajar' => 'id_mata_kuliah']],
         ];
     }
 
@@ -50,30 +51,24 @@ class Jadwal extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'nip_nidn' => 'Nip Nidn',
-            'kode_mata_kuliah' => 'Kode Mata Kuliah',
-            'kode_organisasi' => 'Kode Organisasi',
-            'nomor_sk' => 'Nomor Sk',
-            'sks_ekivalen' => 'Sks Ekivalen',
-            'beban_sks_dosen' => 'Beban Sks Dosen',
-            'fte' => 'Fte',
-            'status' => 'Status',
+            'id' => 'ID',
+            'nip_nidn_dosen_pengajar' => 'Nip Nidn Dosen Pengajar',
+            'nama_dosen' => 'Nama Dosen',
+            'departemen_dosen' => 'Departemen Dosen',
+            'id_mata_kuliah_pengajar' => 'Id Mata Kuliah Pengajar',
+            'nama_mata_kuliah' => 'Nama Mata Kuliah',
+            'jenis_mata_kuliah' => 'Jenis Mata Kuliah',
+            'kategori_koefisien' => 'Kategori Koefisien',
+            'jadwal_start' => 'Jadwal Start',
+            'jadwal_end' => 'Jadwal End',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNipNidn()
+    public function getNipNidnDosenPengajar()
     {
-        return $this->hasOne(Dosen::className(), ['nip_nidn' => 'nip_nidn']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getKodeMataKuliah()
-    {
-        return $this->hasOne(MataKuliah::className(), ['kode_mata_kuliah' => 'kode_mata_kuliah']);
+        return $this->hasOne(Pengajar::className(), ['nip_nidn_dosen' => 'nip_nidn_dosen_pengajar', 'id_mata_kuliah' => 'id_mata_kuliah_pengajar']);
     }
 }

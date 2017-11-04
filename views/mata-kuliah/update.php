@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MataKuliah */
 
-$this->title = 'Update Mata Kuliah: ' . $model->kode_mata_kuliah;
-$this->params['breadcrumbs'][] = ['label' => 'Mata Kuliahs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->kode_mata_kuliah, 'url' => ['view', 'id' => $model->kode_mata_kuliah]];
+$this->title = 'Update Mata Kuliah: ' . $model->nama_mata_kuliah;
+$this->params['breadcrumbs'][] = ['label' => 'Mata Kuliah', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->nama_mata_kuliah, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="mata-kuliah-update">

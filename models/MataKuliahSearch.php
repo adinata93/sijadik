@@ -18,7 +18,8 @@ class MataKuliahSearch extends MataKuliah
     public function rules()
     {
         return [
-            [['kode_mata_kuliah', 'nama_mata_kuliah', 'jenis_mata_kuliah', 'program_studi', 'jenjang', 'program_kelas'], 'safe'],
+            [['id'], 'integer'],
+            [['fakultas_unit_pengajaran', 'kode_organisasi', 'program_studi', 'jenjang', 'program', 'kategori_koefisien', 'nama_mata_kuliah', 'jenis_mata_kuliah', 'kode_kelas', 'jenis_kelas'], 'safe'],
         ];
     }
 
@@ -57,12 +58,20 @@ class MataKuliahSearch extends MataKuliah
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(['like', 'kode_mata_kuliah', $this->kode_mata_kuliah])
-            ->andFilterWhere(['like', 'nama_mata_kuliah', $this->nama_mata_kuliah])
-            ->andFilterWhere(['like', 'jenis_mata_kuliah', $this->jenis_mata_kuliah])
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
+
+        $query->andFilterWhere(['like', 'fakultas_unit_pengajaran', $this->fakultas_unit_pengajaran])
+            ->andFilterWhere(['like', 'kode_organisasi', $this->kode_organisasi])
             ->andFilterWhere(['like', 'program_studi', $this->program_studi])
             ->andFilterWhere(['like', 'jenjang', $this->jenjang])
-            ->andFilterWhere(['like', 'program_kelas', $this->program_kelas]);
+            ->andFilterWhere(['like', 'program', $this->program])
+            ->andFilterWhere(['like', 'kategori_koefisien', $this->kategori_koefisien])
+            ->andFilterWhere(['like', 'nama_mata_kuliah', $this->nama_mata_kuliah])
+            ->andFilterWhere(['like', 'jenis_mata_kuliah', $this->jenis_mata_kuliah])
+            ->andFilterWhere(['like', 'kode_kelas', $this->kode_kelas])
+            ->andFilterWhere(['like', 'jenis_kelas', $this->jenis_kelas]);
 
         return $dataProvider;
     }

@@ -15,21 +15,25 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'nip_nidn') ?>
+    <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'kode_mata_kuliah') ?>
+    <?= $form->field($model, 'nip_nidn_dosen_pengajar') ?>
 
-    <?= $form->field($model, 'kode_organisasi') ?>
+    <?= $form->field($model, 'nama_dosen') ?>
 
-    <?= $form->field($model, 'nomor_sk') ?>
+    <?= $form->field($model, 'departemen_dosen') ?>
 
-    <?= $form->field($model, 'sks_ekivalen') ?>
+    <?= $form->field($model, 'id_mata_kuliah_pengajar') ?>
 
-    <?php // echo $form->field($model, 'beban_sks_dosen') ?>
+    <?php // echo $form->field($model, 'nama_mata_kuliah') ?>
 
-    <?php // echo $form->field($model, 'fte') ?>
+    <?php // echo $form->field($model, 'jenis_mata_kuliah') ?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?php // echo $form->field($model, 'kategori_koefisien') ?>
+
+    <?php // echo $form->field($model, 'jadwal_start') ?>
+
+    <?php // echo $form->field($model, 'jadwal_end') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

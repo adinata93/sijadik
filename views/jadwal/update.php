@@ -1,13 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+use app\models\MataKuliah;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Jadwal */
 
-$this->title = 'Update Jadwal: ' . $model->nip_nidn;
-$this->params['breadcrumbs'][] = ['label' => 'Jadwals', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->nip_nidn, 'url' => ['view', 'nip_nidn' => $model->nip_nidn, 'kode_mata_kuliah' => $model->kode_mata_kuliah]];
+$matkul = MataKuliah::find()->where(['id' => $model->id_mata_kuliah_pengajar])->one();
+
+$this->title = 'Update Jadwal: ' . $matkul->nama_mata_kuliah;
+$this->params['breadcrumbs'][] = ['label' => 'Jadwal', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $matkul->nama_mata_kuliah, 'url' => ['view', 'id' => $model->id, 'nip_nidn_dosen_pengajar' => $model->nip_nidn_dosen_pengajar, 'id_mata_kuliah_pengajar' => $model->id_mata_kuliah_pengajar]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="jadwal-update">

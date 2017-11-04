@@ -7,16 +7,20 @@ use Yii;
 /**
  * This is the model class for table "mata_kuliah".
  *
- * @property string $kode_mata_kuliah
- * @property string $nama_mata_kuliah
- * @property string $jenis_mata_kuliah
+ * @property integer $id
+ * @property string $fakultas_unit_pengajaran
+ * @property string $kode_organisasi
  * @property string $program_studi
  * @property string $jenjang
- * @property string $program_kelas
+ * @property string $program
+ * @property string $kategori_koefisien
+ * @property string $nama_mata_kuliah
+ * @property string $jenis_mata_kuliah
+ * @property string $kode_kelas
+ * @property string $jenis_kelas
  *
- * @property Jadwal[] $jadwals
- * @property Dosen[] $nipNidns
- * @property Kelas[] $kelas
+ * @property Pengajar[] $pengajars
+ * @property Dosen[] $nipNidnDosens
  */
 class MataKuliah extends \yii\db\ActiveRecord
 {
@@ -34,9 +38,9 @@ class MataKuliah extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kode_mata_kuliah'], 'required'],
-            [['kode_mata_kuliah', 'jenis_mata_kuliah', 'program_studi', 'jenjang', 'program_kelas'], 'string', 'max' => 40],
-            [['nama_mata_kuliah'], 'string', 'max' => 100],
+            [['fakultas_unit_pengajaran', 'kode_organisasi', 'program_studi', 'jenjang', 'program', 'kategori_koefisien', 'nama_mata_kuliah', 'jenis_mata_kuliah', 'kode_kelas', 'jenis_kelas'], 'required'],
+            [['fakultas_unit_pengajaran', 'kategori_koefisien'], 'string'],
+            [['kode_organisasi', 'program_studi', 'jenjang', 'program', 'nama_mata_kuliah', 'jenis_mata_kuliah', 'kode_kelas', 'jenis_kelas'], 'string', 'max' => 100],
         ];
     }
 
@@ -46,36 +50,33 @@ class MataKuliah extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'kode_mata_kuliah' => 'Kode Mata Kuliah',
-            'nama_mata_kuliah' => 'Nama Mata Kuliah',
-            'jenis_mata_kuliah' => 'Jenis Mata Kuliah',
+            'id' => 'ID',
+            'fakultas_unit_pengajaran' => 'Fakultas Unit Pengajaran',
+            'kode_organisasi' => 'Kode Organisasi',
             'program_studi' => 'Program Studi',
             'jenjang' => 'Jenjang',
-            'program_kelas' => 'Program Kelas',
+            'program' => 'Program',
+            'kategori_koefisien' => 'Kategori Koefisien',
+            'nama_mata_kuliah' => 'Nama Mata Kuliah',
+            'jenis_mata_kuliah' => 'Jenis Mata Kuliah',
+            'kode_kelas' => 'Kode Kelas',
+            'jenis_kelas' => 'Jenis Kelas',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getJadwals()
+    public function getPengajars()
     {
-        return $this->hasMany(Jadwal::className(), ['kode_mata_kuliah' => 'kode_mata_kuliah']);
+        return $this->hasMany(Pengajar::className(), ['id_mata_kuliah' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNipNidns()
+    public function getNipNidnDosens()
     {
-        return $this->hasMany(Dosen::className(), ['nip_nidn' => 'nip_nidn'])->viaTable('jadwal', ['kode_mata_kuliah' => 'kode_mata_kuliah']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getKelas()
-    {
-        return $this->hasMany(Kelas::className(), ['kode_mata_kuliah' => 'kode_mata_kuliah']);
+        return $this->hasMany(Dosen::className(), ['nip_nidn' => 'nip_nidn_dosen'])->viaTable('pengajar', ['id_mata_kuliah' => 'id']);
     }
 }

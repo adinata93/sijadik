@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nama_dosen')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'departemen')->dropDownList([ 'oral biologi' => 'Oral biologi', 'ilmu bedah mulut' => 'Ilmu bedah mulut', 'ilmu koservasi gigi' => 'Ilmu koservasi gigi', 'ilmu kedokteran gigi anak' => 'Ilmu kedokteran gigi anak', 'ilmu penyakit anak' => 'Ilmu penyakit anak', 'ilmu kesehatan gigi masyarakat pencegahan' => 'Ilmu kesehatan gigi masyarakat pencegahan', 'ilmu material kedokteran gigi' => 'Ilmu material kedokteran gigi', 'radiologi kedokteran gigi' => 'Radiologi kedokteran gigi', 'ortodonsia' => 'Ortodonsia', 'prostodonsia' => 'Prostodonsia', 'peridonsia' => 'Peridonsia', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'departemen_dosen')->dropDownList([ 'Oral Biologi' => 'Oral Biologi', 'Ilmu Bedah Mulut' => 'Ilmu Bedah Mulut', 'Ilmu Koservasi Gigi' => 'Ilmu Koservasi Gigi', 'Ilmu Kedokteran Gigi Anak' => 'Ilmu Kedokteran Gigi Anak', 'Ilmu Penyakit Mulut' => 'Ilmu Penyakit Mulut', 'Ilmu Kesehatan Gigi Masyarakat Pencegahan' => 'Ilmu Kesehatan Gigi Masyarakat Pencegahan', 'Ilmu Material Kedokteran Gigi' => 'Ilmu Material Kedokteran Gigi', 'Radiologi Kedokteran Gigi' => 'Radiologi Kedokteran Gigi', 'Ortodonsia' => 'Ortodonsia', 'Periodonsia' => 'Periodonsia', 'Prostodonsia' => 'Prostodonsia', ], ['prompt' => '']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

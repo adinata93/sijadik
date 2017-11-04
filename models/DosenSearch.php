@@ -18,7 +18,7 @@ class DosenSearch extends Dosen
     public function rules()
     {
         return [
-            [['nip_nidn', 'nama_dosen', 'departemen'], 'safe'],
+            [['nip_nidn', 'nama_dosen', 'departemen_dosen'], 'safe'],
         ];
     }
 
@@ -59,7 +59,7 @@ class DosenSearch extends Dosen
         // grid filtering conditions
         $query->andFilterWhere(['like', 'nip_nidn', $this->nip_nidn])
             ->andFilterWhere(['like', 'nama_dosen', $this->nama_dosen])
-            ->andFilterWhere(['like', 'departemen', $this->departemen]);
+            ->andFilterWhere(['like', 'departemen_dosen', $this->departemen_dosen]);
 
         return $dataProvider;
     }

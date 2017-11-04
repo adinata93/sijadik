@@ -46,7 +46,7 @@ class MataKuliahController extends Controller
 
     /**
      * Displays a single MataKuliah model.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -65,8 +65,31 @@ class MataKuliahController extends Controller
     {
         $model = new MataKuliah();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->kode_mata_kuliah]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $matkul = MataKuliah::find()
+                ->where(
+                    ['and',
+                        ['kategori_koefisien' => $model->kategori_koefisien],
+                        ['and',
+                            ['nama_mata_kuliah' => $model->nama_mata_kuliah],
+                            ['jenis_mata_kuliah' => $model->jenis_mata_kuliah]
+                        ]
+                    ]
+                )
+            ->all();
+
+            if ($matkul == null) {
+                $model->save();
+            } else {
+                Yii::$app->session->setFlash('danger', '<b>GAGAL CREATE</b> <br> Mata kuliah <i>' . $model->nama_mata_kuliah . '</i> dengan jenis <i>' . $model->jenis_mata_kuliah . '</i> dan kategori <i>' . $model->kategori_koefisien . '</i> sudah ada');
+                Yii::$app->session->setFlash('info', '<b>SOLUSI</b> <br> Berikan input <i>Kategori Koefisien</i>, <i>Nama Mata Kuliah</i> dan <i>Jenis Mata Kuliah</i> yang berbeda jika ingin menambahkan mata kuliah baru');
+                
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,15 +100,41 @@ class MataKuliahController extends Controller
     /**
      * Updates an existing MataKuliah model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->kode_mata_kuliah]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $matkul = MataKuliah::find()
+                ->where(
+                    ['and',
+                        ['!=', 'id', $id],
+                        ['and',
+                            ['kategori_koefisien' => $model->kategori_koefisien],
+                            ['and',
+                                ['nama_mata_kuliah' => $model->nama_mata_kuliah],
+                                ['jenis_mata_kuliah' => $model->jenis_mata_kuliah]
+                            ]
+                        ]
+                    ]
+                )
+            ->all();
+
+            if ($matkul == null) {
+                $model->save();
+            } else {
+                Yii::$app->session->setFlash('danger', '<b>GAGAL UPDATE</b> <br> Mata kuliah <i>' . $model->nama_mata_kuliah . '</i> dengan jenis <i>' . $model->jenis_mata_kuliah . '</i> dan kategori <i>' . $model->kategori_koefisien . '</i> sudah ada');
+                Yii::$app->session->setFlash('info', '<b>SOLUSI</b> <br> Berikan input <i>Kategori Koefisien</i>, <i>Nama Mata Kuliah</i> dan <i>Jenis Mata Kuliah</i> yang berbeda jika ingin menambahkan mata kuliah baru');
+                
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,7 +145,7 @@ class MataKuliahController extends Controller
     /**
      * Deletes an existing MataKuliah model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -109,7 +158,7 @@ class MataKuliahController extends Controller
     /**
      * Finds the MataKuliah model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
+     * @param integer $id
      * @return MataKuliah the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

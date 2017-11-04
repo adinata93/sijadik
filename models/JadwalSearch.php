@@ -18,9 +18,8 @@ class JadwalSearch extends Jadwal
     public function rules()
     {
         return [
-            [['nip_nidn', 'kode_mata_kuliah', 'kode_organisasi', 'nomor_sk'], 'safe'],
-            [['sks_ekivalen', 'beban_sks_dosen', 'fte'], 'number'],
-            [['status'], 'integer'],
+            [['id', 'id_mata_kuliah_pengajar'], 'integer'],
+            [['nip_nidn_dosen_pengajar', 'nama_dosen', 'departemen_dosen', 'nama_mata_kuliah', 'jenis_mata_kuliah', 'kategori_koefisien', 'jadwal_start', 'jadwal_end'], 'safe'],
         ];
     }
 
@@ -60,16 +59,18 @@ class JadwalSearch extends Jadwal
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'sks_ekivalen' => $this->sks_ekivalen,
-            'beban_sks_dosen' => $this->beban_sks_dosen,
-            'fte' => $this->fte,
-            'status' => $this->status,
+            'id' => $this->id,
+            'id_mata_kuliah_pengajar' => $this->id_mata_kuliah_pengajar,
+            'jadwal_start' => $this->jadwal_start,
+            'jadwal_end' => $this->jadwal_end,
         ]);
 
-        $query->andFilterWhere(['like', 'nip_nidn', $this->nip_nidn])
-            ->andFilterWhere(['like', 'kode_mata_kuliah', $this->kode_mata_kuliah])
-            ->andFilterWhere(['like', 'kode_organisasi', $this->kode_organisasi])
-            ->andFilterWhere(['like', 'nomor_sk', $this->nomor_sk]);
+        $query->andFilterWhere(['like', 'nip_nidn_dosen_pengajar', $this->nip_nidn_dosen_pengajar])
+            ->andFilterWhere(['like', 'nama_dosen', $this->nama_dosen])
+            ->andFilterWhere(['like', 'departemen_dosen', $this->departemen_dosen])
+            ->andFilterWhere(['like', 'nama_mata_kuliah', $this->nama_mata_kuliah])
+            ->andFilterWhere(['like', 'jenis_mata_kuliah', $this->jenis_mata_kuliah])
+            ->andFilterWhere(['like', 'kategori_koefisien', $this->kategori_koefisien]);
 
         return $dataProvider;
     }

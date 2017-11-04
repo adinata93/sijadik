@@ -9,12 +9,12 @@ use Yii;
  *
  * @property string $nip_nidn
  * @property string $nama_dosen
- * @property string $departemen
+ * @property string $departemen_dosen
  *
- * @property Jadwal[] $jadwals
- * @property MataKuliah[] $kodeMataKuliahs
- * @property PembimbingPenguji[] $pembimbingPengujis
- * @property Mahasiswa[] $npms
+ * @property Pembimbing[] $pembimbings
+ * @property Pengajar[] $pengajars
+ * @property MataKuliah[] $idMataKuliahs
+ * @property Penguji[] $pengujis
  */
 class Dosen extends \yii\db\ActiveRecord
 {
@@ -32,10 +32,9 @@ class Dosen extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nip_nidn'], 'required'],
-            [['departemen'], 'string'],
-            [['nip_nidn'], 'string', 'max' => 40],
-            [['nama_dosen'], 'string', 'max' => 100],
+            [['nip_nidn', 'nama_dosen', 'departemen_dosen'], 'required'],
+            [['departemen_dosen'], 'string'],
+            [['nip_nidn', 'nama_dosen'], 'string', 'max' => 100],
         ];
     }
 
@@ -47,39 +46,39 @@ class Dosen extends \yii\db\ActiveRecord
         return [
             'nip_nidn' => 'Nip Nidn',
             'nama_dosen' => 'Nama Dosen',
-            'departemen' => 'Departemen',
+            'departemen_dosen' => 'Departemen Dosen',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getJadwals()
+    public function getPembimbings()
     {
-        return $this->hasMany(Jadwal::className(), ['nip_nidn' => 'nip_nidn']);
+        return $this->hasMany(Pembimbing::className(), ['nip_nidn_dosen' => 'nip_nidn']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getKodeMataKuliahs()
+    public function getPengajars()
     {
-        return $this->hasMany(MataKuliah::className(), ['kode_mata_kuliah' => 'kode_mata_kuliah'])->viaTable('jadwal', ['nip_nidn' => 'nip_nidn']);
+        return $this->hasMany(Pengajar::className(), ['nip_nidn_dosen' => 'nip_nidn']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPembimbingPengujis()
+    public function getIdMataKuliahs()
     {
-        return $this->hasMany(PembimbingPenguji::className(), ['nip_nidn' => 'nip_nidn']);
+        return $this->hasMany(MataKuliah::className(), ['id' => 'id_mata_kuliah'])->viaTable('pengajar', ['nip_nidn_dosen' => 'nip_nidn']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNpms()
+    public function getPengujis()
     {
-        return $this->hasMany(Mahasiswa::className(), ['npm' => 'npm'])->viaTable('pembimbing_penguji', ['nip_nidn' => 'nip_nidn']);
+        return $this->hasMany(Penguji::className(), ['nip_nidn_dosen' => 'nip_nidn']);
     }
 }

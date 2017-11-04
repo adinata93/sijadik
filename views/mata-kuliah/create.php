@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model app\models\MataKuliah */
 
 $this->title = 'Create Mata Kuliah';
-$this->params['breadcrumbs'][] = ['label' => 'Mata Kuliahs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Mata Kuliah', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mata-kuliah-create">

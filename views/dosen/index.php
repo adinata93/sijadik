@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\DosenSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Dosen';
+$this->title = 'Dosens';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dosen-index">
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'nip_nidn',
             'nama_dosen',
-            'departemen',
+            'departemen_dosen',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
