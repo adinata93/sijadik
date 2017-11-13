@@ -1,2 +1,0 @@
-username : adinata.dev
-password : inipass01
