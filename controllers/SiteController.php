@@ -31,7 +31,7 @@ class SiteController extends Controller
                             'logout',
                             'contact',
                             'about', 
-                            'signup',                    
+                            //'signup',                    
                             'request-password-reset',
                             'reset-password',
                 ],
