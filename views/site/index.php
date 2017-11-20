@@ -15,9 +15,7 @@ $this->title = 'Sijadik';
 
         <p class="lead">Simulasi Imbal Jasa dan Jadwal Pendidikan</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-
-        
-        <?= Html::img('@web/images/29.jpg');?>
+                
+        <?= Html::img('@web/images/fkg_ui.jpg');?>
     </div>
 </div>
